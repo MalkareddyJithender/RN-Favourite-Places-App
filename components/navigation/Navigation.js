@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import AllPlaces from "../../screens/AllPlaces";
 import AddPlace from "../../screens/AddPlace";
+import Map from "../../screens/Map";
 import Colors from "../../constants/colors";
 import IconButton from "../ui/IconButton";
 
@@ -10,7 +11,7 @@ const Stack = createNativeStackNavigator();
 
 function Navigation() {
   function addIconHandler(navigation) {
-    navigation.navigate("AddPlace")
+    navigation.navigate("AddPlace");
   }
 
   return (
@@ -28,14 +29,14 @@ function Navigation() {
         <Stack.Screen
           name="AllPlaces"
           component={AllPlaces}
-          options={({navigation}) => ({
+          options={({ navigation }) => ({
             title: "Your Favourite Places",
             headerRight: ({ tintColor }) => (
               <IconButton
                 icon="add"
                 size={32}
                 color={tintColor}
-                onPress={addIconHandler.bind(this,navigation)}
+                onPress={addIconHandler.bind(this, navigation)}
               />
             ),
           })}
@@ -47,6 +48,9 @@ function Navigation() {
             title: "Add a new Place",
           }}
         />
+        <Stack.Screen name="Map" component={Map} options={{
+          title:"Google Map"
+        }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

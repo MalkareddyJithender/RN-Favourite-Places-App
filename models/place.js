@@ -1,12 +1,15 @@
 // blueprint of place
 class Place {
-  constructor(title, imageUri, address, location) {
+  constructor(title, imageUri, location) {
     const id = new Date().getTime();
     this.id = id;
     this.title = title;
     this.imageUri = imageUri;
-    this.address = address;
-    this.location = location;
+    this.address = location.address;
+    this.location = {
+      lat: location.lat,
+      lng: location.lng,
+    };
   }
 }
 
