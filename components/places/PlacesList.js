@@ -1,11 +1,21 @@
 import { View, FlatList, Text, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 import Colors from "../../constants/colors";
 
 import PlaceItem from "./PlaceItem";
 
 function PlacesList({ places }) {
+  const navigation = useNavigation();
+
   function renderPlaceItem({ item }) {
-    return <PlaceItem place={item} />;
+    function selectPlaceHandler() {
+      navigation.navigate("PlaceDetails", {
+        placeId: item.id,
+      });
+    }
+
+    return <PlaceItem place={item} onSelect={selectPlaceHandler} />;
   }
 
   if (!places || places.length === 0) {

@@ -4,17 +4,21 @@ import { StyleSheet, Alert } from "react-native";
 
 import IconButton from "../components/ui/IconButton";
 
-function Map({ navigation }) {
-  const [selectedLocation, setSelectedLocation] = useState(null);
+function Map({ navigation, route }) {
+  const initialLocation = route.params;
+  const [selectedLocation, setSelectedLocation] = useState(initialLocation);
 
   const region = {
-    latitude: 17.487932,
-    longitude: 78.3572695,
+    latitude: initialLocation ? initialLocation.latitude : 17.487932,
+    longitude: initialLocation ? initialLocation.longitude : 78.3572695,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
 
   function selectLocationHandler(event) {
+    if(initialLocation){
+      return;
+    }
     const lat = event.nativeEvent.coordinate.latitude;
     const lng = event.nativeEvent.coordinate.longitude;
     const coords = {
@@ -40,6 +44,13 @@ function Map({ navigation }) {
   }
 
   useEffect(() => {
+    if (initialLocation) {
+      // setSelectedLocation({
+      //   latitude: initialLocation.pickedLat,
+      //   longitude: initialLocation.pickedLng,
+      // });
+      return;
+    }
     navigation.setOptions({
       headerRight: ({ tintColor }) => (
         <IconButton

@@ -5,9 +5,9 @@ import Input from "./Input";
 import ImagePicker from "./ImagePicker";
 import LocationPicker from "./LocationPicker";
 import Button from "../ui/Button";
-import Place from '../../models/place';
+import Place from "../../models/place";
 
-function PlaceForm({onCreatePlace}) {
+function PlaceForm({ onCreatePlace }) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -17,11 +17,8 @@ function PlaceForm({onCreatePlace}) {
   }
 
   function savePlaceHandler() {
-    const placeData = new Place(enteredTitle,selectedImage,selectedLocation)
+    const placeData = new Place(enteredTitle, selectedImage, selectedLocation);
     onCreatePlace(placeData);
-    // console.log("enteredTitle", enteredTitle);
-    // console.log("selectedImage",selectedImage);
-    // console.log("selectedLocation",selectedLocation);
   }
 
   function takeImageHandler(image) {
@@ -53,6 +50,7 @@ export default PlaceForm;
 const styles = StyleSheet.create({
   form: {
     flex: 1,
-    padding: 24,
+    paddingHorizontal: 24,
+    marginTop: 24,
   },
 });

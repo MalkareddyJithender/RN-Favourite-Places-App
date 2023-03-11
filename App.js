@@ -1,8 +1,30 @@
+import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+
 import Navigation from "./components/navigation/Navigation";
+import { init } from "./utils/database";
+
+// displays splash screen
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  const [dbInitialized, setDbInitialized] = useState(false);
+
+  useEffect(() => {
+    init()
+      .then(() => {
+        setDbInitialized(true);
+      })
+      .catch((e) => {
+        console.log("error", e);
+      });
+  }, []);
+
+  if (dbInitialized) {
+    SplashScreen.hideAsync();
+  }
+
   return (
     <>
       <StatusBar style="dark" />
@@ -10,12 +32,3 @@ export default function App() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

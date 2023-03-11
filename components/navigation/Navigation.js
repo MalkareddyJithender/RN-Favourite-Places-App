@@ -6,6 +6,7 @@ import AddPlace from "../../screens/AddPlace";
 import Map from "../../screens/Map";
 import Colors from "../../constants/colors";
 import IconButton from "../ui/IconButton";
+import PlaceDetails from "../../screens/PlaceDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,7 @@ function Navigation() {
         <Stack.Screen name="Map" component={Map} options={{
           title:"Google Map"
         }} />
+        <Stack.Screen name="PlaceDetails" component={PlaceDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );
